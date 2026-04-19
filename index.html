@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CleanByYami — Professional Cleaning | Gainesville, FL</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- ═══ EMAIL SETUP INSTRUCTIONS (READ THIS!) ═══
+  To enable REAL emails:
+  1. Go to https://emailjs.com and create FREE account
+  2. Add Email Service (Gmail) -> copy SERVICE ID
+  3. Create Template for "booking received" -> copy TEMPLATE ID
+  4. Create Template for "booking confirmed" -> copy TEMPLATE ID
+  5. Go to Account -> copy PUBLIC KEY
+  6. Replace the values in the CONFIG section below
+  ═══════════════════════════════════════════════ -->
+
+<style>
+:root{
+  --red:#C0392B;--rd:#7B241C;--rl:#E74C3C;
+  --pink:#E91E8C;--pl:#F48FB1;--pp:#FDE8F2;--pp2:#FCF0F7;
+  --rose:#FF6B9D;--cream:#FFF8F9;
+  --t1:#1A0A0E;--t2:#5C3347;--t3:#9E7A8A;
+  --bdr:#F2C4D8;--r:16px;--rs:10px;
+  --sh:0 4px 24px rgba(192,57,43,.08);
+  --shh:0 8px 40px rgba(233,30,140,.15);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--t1);line-height:1.6;overflow-x:hidden;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-thumb{background:var(--pl);border-radius:10px;}
+
+/* ── NAV ── */
+#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bdr);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:66px;transition:box-shadow .3s;}
+#navbar.scrolled{box-shadow:0 4px 30px rgba(192,57,43,.1);}
+.logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--red);text-decoration:none;cursor:pointer;}
+.logo span{color:var(--pink);}
+.nav-links{display:flex;gap:2px;}
+.nav-links a{font-size:13px;color:var(--t2);text-decoration:none;padding:7px 13px;border-radius:8px;transition:all .2s;font-weight:500;cursor:pointer;}
+.nav-links a:hover{background:var(--pp);color:var(--red);}
+.nav-links a.active{background:var(--red);color:#fff;}
+.nav-cta{background:linear-gradient(135deg,var(--red),var(--pink));color:#fff;border:none;padding:9px 20px;border-radius:24px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;}
+.nav-cta:hover{opacity:.88;}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
+.hamburger span{display:block;width:24px;height:2px;background:var(--red);border-radius:2px;}
+.mob-menu{display:none;position:fixed;top:66px;left:0;right:0;background:#fff;border-bottom:1px solid var(--bdr);padding:1rem;z-index:999;flex-direction:column;gap:4px;}
+.mob-menu.open{display:flex;}
+.mob-menu a{font-size:15px;color:var(--t2);text-decoration:none;padding:11px 16px;border-radius:10px;font-weight:500;cursor:pointer;}
+.mob-menu a:hover{background:var(--pp);}
+
+/* ── PAGES ── */
+.page{display:none;padding-top:66px;min-height:100vh;}
+.page.active{display:block;}
+
+/* ── HERO ── */
+.hero{background:var(--cream);padding:76px 2rem 88px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-60px;left:-60px;width:280px;height:280px;background:radial-gradient(circle,rgba(233,30,140,.07) 0%,transparent 70%);border-radius:50%;}
+.hero::after{content:'';position:absolute;bottom:-80px;right:-40px;width:320px;height:320px;background:radial-gradient(circle,rgba(192,57,43,.06) 0%,transparent 70%);border-radius:50%;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--bdr);color:var(--pink);padding:6px 16px;border-radius:20px;font-size:13px;font-weight:600;margin-bottom:22px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(34px,6vw,60px);font-weight:700;line-height:1.15;color:var(--t1);margin-bottom:18px;position:relative;z-index:1;}
+.hero h1 em{font-style:italic;color:var(--red);}
+.hero p{font-size:16px;color:var(--t2);max-width:500px;margin:0 auto 32px;line-height:1.7;position:relative;z-index:1;}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
+.btn-main{background:linear-gradient(135deg,var(--red),var(--pink));color:#fff;border:none;padding:13px 30px;border-radius:28px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .25s;}
+.btn-main:hover{transform:translateY(-2px);box-shadow:var(--shh);}
+.btn-out{background:#fff;color:var(--red);border:2px solid var(--bdr);padding:11px 28px;border-radius:28px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .25s;}
+.btn-out:hover{border-color:var(--red);transform:translateY(-2px);}
+.trust-bar{display:flex;justify-content:center;gap:28px;margin-top:44px;flex-wrap:wrap;position:relative;z-index:1;}
+.trust-item{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--t3);font-weight:500;}
+
+/* ── LAYOUT ── */
+.wrap{max-width:980px;margin:0 auto;padding:0 1.5rem;}
+.sec{padding:64px 0;}
+.sec-tag{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--pink);text-transform:uppercase;margin-bottom:8px;}
+.sec-h{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,36px);font-weight:700;color:var(--t1);margin-bottom:10px;line-height:1.2;}
+.sec-s{font-size:15px;color:var(--t2);max-width:520px;line-height:1.7;}
+
+/* ── SERVICE CARDS ── */
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:32px;}
+.svc-card{background:#fff;border:1.5px solid var(--bdr);border-radius:var(--r);padding:26px 20px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;}
+.svc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(135deg,var(--red),var(--pink));transform:scaleX(0);transition:transform .3s;transform-origin:left;}
+.svc-card:hover{box-shadow:var(--shh);transform:translateY(-3px);border-color:var(--pl);}
+.svc-card:hover::before{transform:scaleX(1);}
+.svc-ico{width:50px;height:50px;border-radius:13px;background:var(--pp);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px;}
+.svc-card h3{font-size:15px;font-weight:600;color:var(--t1);margin-bottom:7px;}
+.svc-card p{font-size:13px;color:var(--t2);line-height:1.6;}
+.svc-price{margin-top:12px;font-size:15px;font-weight:700;color:var(--red);}
+
+/* ── CTA STRIP ── */
+.cta-strip{background:linear-gradient(135deg,var(--red) 0%,#A93226 40%,var(--pink) 100%);padding:60px 2rem;text-align:center;color:#fff;}
+.cta-strip h2{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,34px);font-weight:700;margin-bottom:10px;}
+.cta-strip p{font-size:15px;opacity:.9;margin-bottom:26px;}
+.btn-wh{background:#fff;color:var(--red);border:none;padding:13px 34px;border-radius:28px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .25s;}
+.btn-wh:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.15);}
+
+/* ── PRICING ── */
+.ptabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:22px;}
+.ptab{padding:8px 18px;border-radius:22px;font-size:13px;font-weight:600;border:2px solid var(--bdr);background:#fff;cursor:pointer;color:var(--t2);transition:all .2s;font-family:inherit;}
+.ptab:hover{border-color:var(--pink);color:var(--pink);}
+.ptab.on{background:var(--red);color:#fff;border-color:var(--red);}
+.ptbl{width:100%;border-collapse:collapse;font-size:13px;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);}
+.ptbl thead th{background:linear-gradient(135deg,var(--red),var(--pink));color:#fff;padding:13px 16px;text-align:left;font-weight:600;font-size:12px;}
+.ptbl tbody td{padding:12px 16px;border-bottom:1px solid #eee;}
+.ptbl tbody tr:last-child td{border-bottom:none;}
+.ptbl tbody tr:hover td{background:var(--pp2);}
+.pb{color:#1565C0;font-weight:600;}.pd{color:#2E7D32;font-weight:600;}
+.pill{display:inline-block;background:var(--pp);color:var(--rd);font-size:11px;padding:3px 11px;border-radius:11px;font-weight:600;}
+.pnote{font-size:12px;color:var(--t3);margin-top:12px;line-height:1.7;padding:12px 14px;background:var(--cream);border-radius:var(--rs);border-left:3px solid var(--bdr);}
+.calc-box{background:var(--cream);border:2px solid var(--bdr);border-radius:var(--r);padding:26px;margin-top:26px;}
+.calc-box h3{font-family:'Playfair Display',serif;font-size:19px;color:var(--red);margin-bottom:5px;}
+.calc-box p{font-size:13px;color:var(--t2);margin-bottom:18px;}
+.calc-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;align-items:end;}
+.cf label{font-size:11px;font-weight:700;color:var(--t2);letter-spacing:.5px;text-transform:uppercase;display:block;margin-bottom:5px;}
+.cf input{width:100%;padding:10px 13px;border:2px solid var(--bdr);border-radius:var(--rs);font-size:14px;font-weight:600;color:var(--t1);background:#fff;outline:none;font-family:inherit;}
+.cf input:focus{border-color:var(--pink);}
+.calc-res{background:linear-gradient(135deg,var(--red),var(--pink));color:#fff;border-radius:var(--rs);padding:10px 13px;font-size:21px;font-weight:700;text-align:center;}
+
+/* ── FORMS ── */
+.form-wrap{max-width:600px;margin:0 auto;}
+.form-card{background:#fff;border:2px solid var(--bdr);border-radius:var(--r);padding:34px;box-shadow:var(--sh);}
+.fbadge{display:inline-flex;align-items:center;gap:6px;background:#E8F5E9;color:#1B5E20;border:1px solid #C8E6C9;border-radius:20px;padding:5px 13px;font-size:12px;font-weight:600;margin-bottom:18px;}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.fg.full{grid-template-columns:1fr;}
+.ff{display:flex;flex-direction:column;gap:5px;}
+.ff label{font-size:11px;font-weight:700;color:var(--t2);letter-spacing:.5px;text-transform:uppercase;}
+.ff input,.ff select,.ff textarea{padding:10px 13px;border:2px solid var(--bdr);border-radius:var(--rs);font-size:13px;color:var(--t1);background:#fff;outline:none;font-family:inherit;transition:border-color .2s;}
+.ff input:focus,.ff select:focus,.ff textarea:focus{border-color:var(--pink);}
+.ff textarea{min-height:75px;resize:vertical;}
+.price-prev{background:var(--pp);border:2px solid var(--bdr);border-radius:var(--rs);padding:14px;margin-bottom:18px;display:none;}
+.price-prev .pl{font-size:11px;color:var(--t3);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;}
+.price-prev .pa{font-size:22px;font-weight:700;color:var(--red);}
+.price-prev .pn{font-size:11px;color:var(--t3);margin-top:2px;}
+.btn-sub{width:100%;background:linear-gradient(135deg,var(--red),var(--pink));color:#fff;border:none;padding:14px;border-radius:28px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .25s;}
+.btn-sub:hover{transform:translateY(-2px);box-shadow:var(--shh);}
+.btn-sub:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+.suc{display:none;text-align:center;padding:40px 20px;}
+.suc .si{font-size:54px;margin-bottom:14px;}
+.suc h3{font-family:'Playfair Display',serif;font-size:24px;color:var(--red);margin-bottom:9px;}
+.suc p{font-size:14px;color:var(--t2);line-height:1.7;}
+.suc .cl{color:var(--pink);font-weight:600;margin-top:10px;font-size:14px;}
+.btn-reset{margin-top:18px;background:var(--cream);color:var(--red);border:2px solid var(--bdr);padding:10px 26px;border-radius:24px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;}
+.sending-msg{text-align:center;padding:20px;color:var(--t2);font-size:14px;}
+
+/* ── PODCAST ── */
+.pod-hero{padding:76px 2rem 66px;background:linear-gradient(160deg,#12001A 0%,#3D0028 50%,#7B241C 100%);text-align:center;color:#fff;}
+.pod-ey{display:inline-block;background:rgba(233,30,140,.2);border:1px solid rgba(233,30,140,.4);color:var(--rose);padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;}
+.pod-title{font-family:'Playfair Display',serif;font-size:clamp(50px,10vw,88px);font-weight:700;letter-spacing:14px;margin-bottom:9px;background:linear-gradient(135deg,#fff,var(--rose));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.pod-sub{font-size:15px;opacity:.75;margin-bottom:30px;font-style:italic;}
+.pod-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.btn-pod{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.3);padding:10px 22px;border-radius:24px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s;}
+.btn-pod:hover{background:rgba(255,255,255,.22);}
+.btn-pod.pri{background:var(--pink);border-color:var(--pink);}
+.pod-tabs{display:flex;gap:7px;margin-bottom:26px;flex-wrap:wrap;}
+.pod-tab{padding:9px 20px;border-radius:22px;font-size:13px;font-weight:600;border:2px solid var(--bdr);background:#fff;cursor:pointer;color:var(--t2);transition:all .2s;font-family:inherit;}
+.pod-tab.on{background:var(--pink);color:#fff;border-color:var(--pink);}
+
+/* ── CONTACT ── */
+.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;}
+.ct-info{background:var(--cream);border:2px solid var(--bdr);border-radius:var(--r);padding:28px;}
+.ct-info h3{font-family:'Playfair Display',serif;font-size:21px;color:var(--red);margin-bottom:20px;}
+.ci{display:flex;align-items:flex-start;gap:11px;margin-bottom:16px;}
+.ci-ico{width:36px;height:36px;border-radius:9px;background:#fff;border:1.5px solid var(--bdr);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.ci-lbl{font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.7px;}
+.ci-val{font-size:14px;font-weight:600;color:var(--t1);margin-top:2px;}
+
+/* ═══════════════════════════════
+   ADMIN PANEL
+═══════════════════════════════ */
+.adm-login-wrap{max-width:400px;margin:60px auto;padding:0 1.5rem;}
+.adm-card{background:#fff;border:2px solid var(--bdr);border-radius:var(--r);padding:40px;box-shadow:var(--sh);text-align:center;}
+.adm-card .lock{font-size:46px;margin-bottom:14px;}
+.adm-card h3{font-family:'Playfair Display',serif;font-size:23px;color:var(--red);margin-bottom:5px;}
+.adm-card p{font-size:13px;color:var(--t2);margin-bottom:22px;}
+.err-msg{background:#FFEBEE;color:#C62828;border-radius:var(--rs);padding:10px 13px;font-size:13px;margin-bottom:13px;display:none;font-weight:500;}
+.hint{font-size:11px;color:var(--t3);margin-top:12px;}
+
+.adm-wrap{display:none;}
+.adm-wrap.active{display:block;}
+.adm-top{background:linear-gradient(135deg,#12001A,var(--rd));color:#fff;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:58px;}
+.adm-top h2{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;}
+.adm-top-r{display:flex;align-items:center;gap:10px;}
+.db-live{display:flex;align-items:center;gap:6px;background:rgba(76,175,80,.15);border:1px solid rgba(76,175,80,.4);color:#81C784;border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;}
+.db-dot{width:7px;height:7px;border-radius:50%;background:#4CAF50;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.45;}}
+.adm-out-btn{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.3);padding:6px 14px;border-radius:8px;font-size:12px;cursor:pointer;font-family:inherit;}
+
+.adm-layout{display:grid;grid-template-columns:210px 1fr;min-height:calc(100vh - 66px - 58px);}
+.adm-side{background:var(--cream);border-right:2px solid var(--bdr);padding:1.2rem .8rem;overflow-y:auto;}
+.adm-side h4{font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:7px;padding:0 8px;}
+.anav{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:9px;font-size:13px;font-weight:500;color:var(--t2);cursor:pointer;transition:all .2s;margin-bottom:2px;border:none;background:none;width:100%;text-align:left;font-family:inherit;}
+.anav:hover{background:var(--pp);color:var(--red);}
+.anav.on{background:var(--red);color:#fff;}
+.anav .ni{font-size:15px;}
+.anav .badge{margin-left:auto;background:var(--pink);color:#fff;border-radius:10px;padding:1px 8px;font-size:10px;font-weight:700;display:none;}
+.anav.on .badge{background:rgba(255,255,255,.3);}
+.side-sep{height:1px;background:var(--bdr);margin:10px 0;}
+
+.adm-body{padding:1.8rem;overflow-y:auto;max-height:calc(100vh - 66px - 58px);}
+.apanel{display:none;}
+.apanel.on{display:block;}
+.aph{font-family:'Playfair Display',serif;font-size:23px;font-weight:700;color:var(--red);margin-bottom:4px;}
+.aps{font-size:13px;color:var(--t2);margin-bottom:24px;}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:24px;}
+.stat-box{background:#fff;border:2px solid var(--bdr);border-radius:var(--rs);padding:16px 12px;text-align:center;}
+.stat-n{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--red);}
+.stat-l{font-size:10px;color:var(--t3);font-weight:700;margin-top:3px;text-transform:uppercase;letter-spacing:.5px;}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;border-radius:var(--r);box-shadow:var(--sh);}
+.dtbl{width:100%;border-collapse:collapse;font-size:12px;}
+.dtbl thead th{background:linear-gradient(135deg,var(--rd),var(--red));color:#fff;padding:10px 12px;text-align:left;font-weight:600;font-size:11px;white-space:nowrap;}
+.dtbl tbody td{padding:11px 12px;border-bottom:1px solid #eee;color:var(--t1);vertical-align:top;}
+.dtbl tbody tr:last-child td{border-bottom:none;}
+.dtbl tbody tr:hover td{background:var(--pp2);}
+.sp{background:#FFF3E0;color:#E65100;border-radius:6px;padding:2px 8px;font-size:10px;font-weight:700;display:inline-block;}
+.sc{background:#E8F5E9;color:#2E7D32;border-radius:6px;padding:2px 8px;font-size:10px;font-weight:700;display:inline-block;}
+.sn{background:#E3F2FD;color:#1565C0;border-radius:6px;padding:2px 8px;font-size:10px;font-weight:700;display:inline-block;}
+.sr{background:#F3E5F5;color:#6A1B9A;border-radius:6px;padding:2px 8px;font-size:10px;font-weight:700;display:inline-block;}
+.tb{border:none;padding:5px 10px;border-radius:7px;font-size:11px;font-weight:600;cursor:pointer;margin-right:3px;font-family:inherit;}
+.tb-ok{background:#E8F5E9;color:#2E7D32;}.tb-ok:hover{background:#C8E6C9;}
+.tb-del{background:#FFEBEE;color:#C62828;}.tb-del:hover{background:#FFCDD2;}
+.tb-email{background:#E3F2FD;color:#1565C0;}.tb-email:hover{background:#BBDEFB;}
+.empty-s{text-align:center;padding:44px 20px;color:var(--t3);}
+.empty-s .ei{font-size:38px;margin-bottom:10px;}
+.sh-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.sh-row h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--red);}
+.btn-cl{background:#FFEBEE;color:#C62828;border:none;padding:7px 13px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;}
+
+/* CMS */
+.cms-box{background:#fff;border:2px solid var(--bdr);border-radius:var(--r);padding:22px;margin-bottom:18px;}
+.cms-box h4{font-size:14px;font-weight:600;color:var(--red);margin-bottom:14px;padding-bottom:9px;border-bottom:1px solid var(--bdr);}
+.cms-r{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:13px;}
+.cms-r.full{grid-template-columns:1fr;}
+.cms-f{display:flex;flex-direction:column;gap:5px;}
+.cms-f label{font-size:11px;font-weight:700;color:var(--t2);letter-spacing:.5px;text-transform:uppercase;}
+.cms-f input,.cms-f textarea,.cms-f select{padding:9px 12px;border:2px solid var(--bdr);border-radius:var(--rs);font-size:13px;color:var(--t1);background:#fff;outline:none;font-family:inherit;}
+.cms-f input:focus,.cms-f textarea:focus{border-color:var(--pink);}
+.cms-f textarea{min-height:68px;resize:vertical;}
+.btn-sv{background:linear-gradient(135deg,var(--red),var(--pink));color:#fff;border:none;padding:10px 24px;border-radius:22px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;}
+.sv-ok{display:none;color:#2E7D32;font-size:13px;font-weight:600;margin-left:10px;animation:fi .3s;}
+@keyframes fi{from{opacity:0;}to{opacity:1;}}
+.pe-hdr{display:grid;grid-template-columns:1.4fr 1fr 1fr 40px;gap:10px;padding:5px 13px;}
+.pe-lbl{font-size:11px;font-weight:700;color:var(--t3);text-align:center;text-transform:uppercase;}
+.pe-grid{display:grid;gap:8px;}
+.pe-row{display:grid;grid-template-columns:1.4fr 1fr 1fr 40px;gap:10px;align-items:center;padding:10px 13px;background:var(--cream);border-radius:var(--rs);border:1px solid var(--bdr);}
+.pe-row input{padding:7px 10px;border:1.5px solid var(--bdr);border-radius:7px;font-size:12px;font-family:inherit;background:#fff;outline:none;width:100%;}
+.pe-row input:focus{border-color:var(--pink);}
+.btn-add{background:var(--pp);color:var(--red);border:2px dashed var(--bdr);border-radius:var(--rs);padding:9px;font-size:13px;font-weight:600;cursor:pointer;width:100%;margin-top:7px;font-family:inherit;}
+.btn-dr{background:#FFEBEE;color:#C62828;border:none;padding:6px 9px;border-radius:7px;font-size:11px;cursor:pointer;font-family:inherit;}
+.se-grid{display:grid;gap:11px;}
+.se-card{background:var(--cream);border:1.5px solid var(--bdr);border-radius:var(--rs);padding:14px;}
+.se-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px;}
+.se-num{font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;}
+.se-row{display:grid;grid-template-columns:70px 1fr 1fr;gap:9px;margin-bottom:8px;}
+.se-row input{padding:7px 10px;border:1.5px solid var(--bdr);border-radius:7px;font-size:12px;font-family:inherit;background:#fff;outline:none;width:100%;}
+.se-row input:focus{border-color:var(--pink);}
+.se-desc{width:100%;padding:7px 10px;border:1.5px solid var(--bdr);border-radius:7px;font-size:12px;font-family:inherit;background:#fff;outline:none;}
+.se-desc:focus{border-color:var(--pink);}
+
+/* EMAIL CONFIG BOX */
+.email-cfg{background:linear-gradient(135deg,#E3F2FD,#F3E5F5);border:2px solid #90CAF9;border-radius:var(--r);padding:22px;margin-bottom:20px;}
+.email-cfg h4{color:#1565C0;font-size:15px;font-weight:700;margin-bottom:8px;}
+.email-cfg p{font-size:13px;color:#37474F;line-height:1.7;margin-bottom:14px;}
+.email-cfg a{color:var(--pink);font-weight:600;}
+.email-status{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:600;}
+.email-status.ok{background:#E8F5E9;color:#2E7D32;border:1px solid #C8E6C9;}
+.email-status.no{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2;}
+
+/* FOOTER */
+footer{background:linear-gradient(135deg,#12001A,var(--rd));color:rgba(255,255,255,.8);padding:40px 2rem 28px;text-align:center;}
+.f-logo{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:#fff;margin-bottom:8px;}
+.f-logo span{color:var(--rose);}
+footer p{font-size:13px;line-height:1.8;}
+footer a{color:var(--pl);text-decoration:none;}
+footer hr{border:none;border-top:1px solid rgba(255,255,255,.1);margin:16px 0;}
+
+@media(max-width:900px){
+  .adm-layout{grid-template-columns:1fr;}
+  .adm-side{border-right:none;border-bottom:2px solid var(--bdr);padding:.8rem;}
+  .adm-side>div{display:flex;flex-wrap:wrap;gap:4px;}
+  .adm-side h4,.side-sep{display:none;}
+  .anav{width:auto;font-size:12px;padding:6px 11px;}
+}
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none;}
+  .hamburger{display:flex;}
+  .ct-grid,.calc-row{grid-template-columns:1fr;}
+  .form-card{padding:20px;}
+  .fg{grid-template-columns:1fr;}
+  .cms-r{grid-template-columns:1fr;}
+  .pe-row{grid-template-columns:1fr 1fr;flex-wrap:wrap;}
+  .se-row{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="logo" onclick="go('home')">Clean<span>ByYami</span></div>
+  <div class="nav-links">
+    <a onclick="go('home')" class="active">Home</a>
+    <a onclick="go('pricing')">Pricing</a>
+    <a onclick="go('book')">Book Cleaning</a>
+    <a onclick="go('podcast')">AFIF Podcast</a>
+    <a onclick="go('contact')">Contact</a>
+    <a onclick="go('admin')" style="color:var(--red);font-weight:600;font-size:12px;">🔐 Admin</a>
+  </div>
+  <a class="nav-cta" onclick="go('book')">✨ Book Now</a>
+  <button class="hamburger" onclick="toggleMob()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-menu" id="mob-menu">
+  <a onclick="go('home');closeMob()">Home</a>
+  <a onclick="go('pricing');closeMob()">Pricing</a>
+  <a onclick="go('book');closeMob()">Book Cleaning</a>
+  <a onclick="go('podcast');closeMob()">AFIF Podcast</a>
+  <a onclick="go('contact');closeMob()">Contact</a>
+  <a onclick="go('admin');closeMob()" style="color:var(--red);font-weight:600;">🔐 Admin</a>
+</div>
+
+<!-- ══════════ HOME ══════════ -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="eyebrow" id="h-eyebrow">🌸 Gainesville, FL & Surrounding Areas</div>
+    <h1 id="h-title">Cleaning That Feels<br><em>Personal</em> Every Time</h1>
+    <p id="h-sub">Professional residential & office cleaning by Yami — reliable, thorough, and tailored to your space.</p>
+    <div class="hero-btns">
+      <button class="btn-main" onclick="go('book')">Book a Cleaning ✨</button>
+      <button class="btn-out" onclick="go('pricing')">View Pricing</button>
+    </div>
+    <div class="trust-bar" id="trust-bar"></div>
+  </div>
+  <div class="sec"><div class="wrap">
+    <div class="sec-tag">Services</div>
+    <div class="sec-h">What We Offer</div>
+    <div class="sec-s" id="svcs-sub">From a quick basic clean to a full deep clean — and hourly options for anything in between.</div>
+    <div class="svc-grid" id="svcs-grid"></div>
+  </div></div>
+  <div class="cta-strip">
+    <h2 id="cta-h">Ready for a Spotless Space?</h2>
+    <p id="cta-p">Book online in 2 minutes — your request goes straight to Yami's dashboard.</p>
+    <button class="btn-wh" onclick="go('book')">Book Your Cleaning Now</button>
+  </div>
+</div>
+
+<!-- ══════════ PRICING ══════════ -->
+<div id="page-pricing" class="page">
+  <div class="sec"><div class="wrap">
+    <div class="sec-tag">Pricing</div>
+    <div class="sec-h">Cleaning Rates</div>
+    <div class="sec-s">Per visit prices. Basic = standard clean · Deep = thorough full clean.</div>
+    <div class="ptabs" id="ptabs" style="margin-top:20px;"></div>
+    <table class="ptbl">
+      <thead><tr><th>Home Type</th><th>Basic Cleaning</th><th>Deep Cleaning</th></tr></thead>
+      <tbody id="ptbody"></tbody>
+    </table>
+    <div class="pnote">* Prices are estimates. Final quote confirmed before service. Office cleaning available — contact for quote.</div>
+    <div class="calc-box">
+      <h3>⏱️ Hourly Calculator</h3>
+      <p>Need a custom clean? Calculate your estimate.</p>
+      <div class="calc-row">
+        <div class="cf"><label>Rate ($/hr)</label><input type="number" id="hr-rate" value="40" min="20" max="200" oninput="calcH()"></div>
+        <div class="cf"><label>Hours</label><input type="number" id="hr-hrs" value="2" min=".5" max="12" step=".5" oninput="calcH()"></div>
+        <div class="cf"><label>Estimate</label><div class="calc-res" id="hr-res">$80</div></div>
+      </div>
+      <button class="btn-main" style="margin-top:16px;font-size:14px;padding:10px 24px;" onclick="go('book')">Book This →</button>
+    </div>
+  </div></div>
+</div>
+
+<!-- ══════════ BOOK ══════════ -->
+<div id="page-book" class="page">
+  <div class="sec"><div class="wrap">
+    <div class="sec-tag">Booking</div>
+    <div class="sec-h">Book Your Cleaning</div>
+    <div class="sec-s">Fill out below — a confirmation email will be sent to you instantly.</div>
+    <div class="form-wrap" style="margin-top:28px;">
+      <div id="bk-form" class="form-card">
+        <div class="fbadge">📧 You'll receive a confirmation email automatically</div>
+        <div class="fg">
+          <div class="ff"><label>First Name *</label><input type="text" id="b-fn" placeholder="Your first name"></div>
+          <div class="ff"><label>Last Name</label><input type="text" id="b-ln" placeholder="Last name"></div>
+        </div>
+        <div class="fg">
+          <div class="ff"><label>Phone *</label><input type="tel" id="b-ph" placeholder="(555) 000-0000"></div>
+          <div class="ff"><label>Email * (for confirmation)</label><input type="email" id="b-em" placeholder="you@email.com"></div>
+        </div>
+        <div class="fg full">
+          <div class="ff"><label>Address to be Cleaned *</label><input type="text" id="b-ad" placeholder="Street address, city, FL"></div>
+        </div>
+        <div class="fg">
+          <div class="ff"><label>Home Type *</label>
+            <select id="b-ty" onchange="updateEst()"><option value="">— Select type —</option></select>
+          </div>
+          <div class="ff"><label>Service *</label>
+            <select id="b-sv" onchange="updateEst()">
+              <option value="">— Select service —</option>
+              <option value="basic">Basic Cleaning</option>
+              <option value="deep">Deep Cleaning</option>
+              <option value="hourly">Hourly Rate</option>
+              <option value="office">Office Cleaning</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg" id="hr-fields" style="display:none;">
+          <div class="ff"><label>Hours</label><input type="number" id="b-hrs" value="2" min="1" max="12" step=".5" oninput="updateEst()"></div>
+          <div class="ff"><label>Rate ($/hr)</label><input type="number" id="b-hr" value="40" min="20" max="200" oninput="updateEst()"></div>
+        </div>
+        <div class="fg">
+          <div class="ff"><label>Preferred Date</label><input type="date" id="b-dt"></div>
+          <div class="ff"><label>Preferred Time</label>
+            <select id="b-tm">
+              <option>Morning (8am–12pm)</option>
+              <option>Afternoon (12pm–4pm)</option>
+              <option>Evening (4pm–7pm)</option>
+              <option>Flexible</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg full">
+          <div class="ff"><label>Special Instructions</label><textarea id="b-nt" placeholder="Pets, gate codes, areas to focus on..."></textarea></div>
+        </div>
+        <div class="price-prev" id="p-prev">
+          <div class="pl">Estimated Price</div>
+          <div class="pa" id="p-amt">—</div>
+          <div class="pn">* Estimate only — confirmed before service</div>
+        </div>
+        <button class="btn-sub" id="bk-btn" onclick="submitBooking()">Confirm Booking Request ✨</button>
+      </div>
+      <div class="suc" id="bk-suc">
+        <div class="si">🎉</div>
+        <h3>Booking Request Sent!</h3>
+        <p>Thanks <strong id="cnf-name"></strong>! A confirmation email has been sent to <strong id="cnf-email"></strong>.<br>Yami will confirm your booking within a few hours.</p>
+        <div class="cl" id="bk-cl">📞 (727) 501-6135 · cleanbyyami@gmail.com</div>
+        <button class="btn-reset" onclick="resetBooking()">Book Another Cleaning</button>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ══════════ PODCAST ══════════ -->
+<div id="page-podcast" class="page">
+  <div class="pod-hero">
+    <div class="pod-ey">🎙️ Now Accepting Applications</div>
+    <div class="pod-title" id="pod-nm">AFIF</div>
+    <div class="pod-sub" id="pod-tg">A podcast by Yami — raw, real, unfiltered conversations</div>
+    <div class="pod-btns">
+      <button class="btn-pod pri" onclick="showPodTab('guest')">Apply as Guest</button>
+      <button class="btn-pod" onclick="showPodTab('host')">Co-Host</button>
+      <button class="btn-pod" onclick="showPodTab('sponsor')">Sponsorship</button>
+    </div>
+  </div>
+  <div class="sec"><div class="wrap">
+    <div class="sec-tag">AFIF Podcast</div>
+    <div class="sec-h">Join the Conversation</div>
+    <div class="sec-s">All submissions go to Yami's admin dashboard directly.</div>
+    <div class="pod-tabs" style="margin-top:22px;">
+      <button class="pod-tab on" id="pt-guest" onclick="showPodTab('guest')">🎙️ Guest</button>
+      <button class="pod-tab" id="pt-host" onclick="showPodTab('host')">🎧 Co-Host</button>
+      <button class="pod-tab" id="pt-sponsor" onclick="showPodTab('sponsor')">💼 Sponsor</button>
+    </div>
+    <div class="form-wrap" style="margin:0;">
+      <div id="pf-guest" class="form-card">
+        <div class="fbadge">🗄️ Goes directly to Yami's dashboard</div>
+        <div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--red);font-weight:700;margin-bottom:15px;">Guest Application</div>
+        <div class="fg"><div class="ff"><label>Full Name *</label><input type="text" id="pg-nm" placeholder="Your name"></div><div class="ff"><label>Pronouns</label><input type="text" id="pg-pr" placeholder="She/her..."></div></div>
+        <div class="fg"><div class="ff"><label>Email *</label><input type="email" id="pg-em" placeholder="you@email.com"></div><div class="ff"><label>Instagram / Social</label><input type="text" id="pg-so" placeholder="@handle"></div></div>
+        <div class="fg full"><div class="ff"><label>What do you want to talk about? *</label><textarea id="pg-tp" placeholder="Your story, expertise, topic ideas..."></textarea></div></div>
+        <div class="fg"><div class="ff"><label>Format</label><select id="pg-fm"><option>In-person (Gainesville, FL)</option><option>Virtual</option><option>Either works</option></select></div><div class="ff"><label>Best Time</label><select id="pg-ti"><option>Mornings</option><option>Afternoons</option><option>Evenings</option><option>Weekends</option><option>Flexible</option></select></div></div>
+        <div class="fg full"><div class="ff"><label>Anything else?</label><textarea id="pg-ex" placeholder="Links, context..."></textarea></div></div>
+        <button class="btn-sub" onclick="subPod('guest')">Submit Application ✨</button>
+      </div>
+      <div id="pf-host" style="display:none;" class="form-card">
+        <div class="fbadge">🗄️ Goes to Yami's dashboard</div>
+        <div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--red);font-weight:700;margin-bottom:15px;">Co-Host Inquiry</div>
+        <div class="fg"><div class="ff"><label>Full Name *</label><input type="text" id="ph-nm" placeholder="Your name"></div><div class="ff"><label>Email *</label><input type="email" id="ph-em" placeholder="you@email.com"></div></div>
+        <div class="fg full"><div class="ff"><label>Why co-host with Yami? *</label><textarea id="ph-wy" placeholder="Your vibe, energy..."></textarea></div></div>
+        <div class="fg full"><div class="ff"><label>Social Links</label><input type="text" id="ph-so" placeholder="Instagram, TikTok..."></div></div>
+        <div class="fg"><div class="ff"><label>Episode Idea</label><input type="text" id="ph-id" placeholder="Topic?"></div><div class="ff"><label>Availability</label><select id="ph-av"><option>Weekdays</option><option>Weekends</option><option>Flexible</option></select></div></div>
+        <button class="btn-sub" onclick="subPod('host')">Submit Inquiry ✨</button>
+      </div>
+      <div id="pf-sponsor" style="display:none;" class="form-card">
+        <div class="fbadge">🗄️ Goes to Yami's dashboard</div>
+        <div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--red);font-weight:700;margin-bottom:15px;">Sponsorship & Partnership</div>
+        <div class="fg"><div class="ff"><label>Your Name *</label><input type="text" id="ps-nm" placeholder="Full name"></div><div class="ff"><label>Brand / Company *</label><input type="text" id="ps-br" placeholder="Business name"></div></div>
+        <div class="fg"><div class="ff"><label>Email *</label><input type="email" id="ps-em" placeholder="business@email.com"></div><div class="ff"><label>Budget</label><select id="ps-bu"><option>Under $200</option><option>$200–$500</option><option>$500–$1,000</option><option>$1,000+</option><option>Open</option></select></div></div>
+        <div class="fg full"><div class="ff"><label>What are you promoting? *</label><textarea id="ps-de" placeholder="Your product or brand..."></textarea></div></div>
+        <button class="btn-sub" onclick="subPod('sponsor')">Submit Inquiry ✨</button>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ══════════ CONTACT ══════════ -->
+<div id="page-contact" class="page">
+  <div class="sec"><div class="wrap">
+    <div class="sec-tag">Get in Touch</div>
+    <div class="sec-h">Let's Connect</div>
+    <div class="sec-s">Questions before booking? Yami's easy to reach.</div>
+    <div class="ct-grid" style="margin-top:28px;">
+      <div class="ct-info">
+        <h3>CleanByYami</h3>
+        <div class="ci"><div class="ci-ico">📞</div><div><div class="ci-lbl">Phone</div><div class="ci-val" id="ci-ph">—</div></div></div>
+        <div class="ci"><div class="ci-ico">📧</div><div><div class="ci-lbl">Email</div><div class="ci-val" id="ci-em">—</div></div></div>
+        <div class="ci"><div class="ci-ico">🌐</div><div><div class="ci-lbl">Website</div><div class="ci-val" id="ci-wb">—</div></div></div>
+        <div class="ci"><div class="ci-ico">📍</div><div><div class="ci-lbl">Service Area</div><div class="ci-val" id="ci-ar">—</div></div></div>
+        <div class="ci"><div class="ci-ico">⏰</div><div><div class="ci-lbl">Availability</div><div class="ci-val" id="ci-av">—</div></div></div>
+      </div>
+      <div class="form-card">
+        <div class="fbadge">🗄️ Message goes to Yami's dashboard</div>
+        <div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--red);font-weight:700;margin-bottom:15px;">Send a Message</div>
+        <div class="fg"><div class="ff"><label>Name *</label><input type="text" id="c-nm" placeholder="Your name"></div><div class="ff"><label>Email *</label><input type="email" id="c-em" placeholder="you@email.com"></div></div>
+        <div class="fg full"><div class="ff"><label>Subject</label><input type="text" id="c-su" placeholder="What's this about?"></div></div>
+        <div class="fg full"><div class="ff"><label>Message *</label><textarea id="c-ms" placeholder="How can Yami help you?" style="min-height:100px;"></textarea></div></div>
+        <button class="btn-sub" id="c-btn" onclick="subContact()">Send Message ✉️</button>
+        <div id="c-suc" style="display:none;text-align:center;padding:20px 0;">
+          <div style="font-size:38px;margin-bottom:10px;">✉️</div>
+          <div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--red);margin-bottom:5px;">Message Sent!</div>
+          <div style="font-size:13px;color:var(--t2);">Yami will get back to you soon.</div>
+          <button class="btn-reset" style="margin-top:14px;" onclick="g('c-btn').style.display='block';g('c-suc').style.display='none';">Send Another Message</button>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ══════════ ADMIN ══════════ -->
+<div id="page-admin" class="page">
+
+  <!-- LOGIN SCREEN -->
+  <div id="adm-login">
+    <div class="adm-login-wrap">
+      <div class="adm-card">
+        <div class="lock">🔐</div>
+        <h3>Admin Only</h3>
+        <p>This panel is only for Yami. All customer orders appear here.</p>
+        <div class="err-msg" id="l-err">Wrong password. Try again.</div>
+        <div class="ff" style="text-align:left;margin-bottom:14px;">
+          <label>Password</label>
+          <input type="password" id="adm-pw" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')admLogin()" style="font-size:15px;padding:12px 14px;">
+        </div>
+        <button class="btn-sub" onclick="admLogin()">Login to Dashboard</button>
+        <div class="hint"><strong></strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="adm-dash" class="adm-wrap">
+    <div class="adm-top">
+      <h2>CleanByYami — Admin Dashboard</h2>
+      <div class="adm-top-r">
+        <div class="db-live"><div class="db-dot"></div>🔥 Firebase Live</div>
+        <button class="adm-out-btn" onclick="admOut()">Logout</button>
+      </div>
+    </div>
+    <div class="adm-layout">
+
+      <!-- SIDEBAR -->
+      <div class="adm-side">
+        <div>
+          <h4>Orders</h4>
+          <button class="anav on" id="an-overview" onclick="aTab('overview')"><span class="ni">📊</span> Overview</button>
+          <button class="anav" id="an-bookings" onclick="aTab('bookings')"><span class="ni">🧹</span> Bookings <span class="badge" id="b-bdg">0</span></button>
+          <button class="anav" id="an-podcast" onclick="aTab('podcast')"><span class="ni">🎙️</span> Podcast Apps <span class="badge" id="p-bdg">0</span></button>
+          <button class="anav" id="an-messages" onclick="aTab('messages')"><span class="ni">✉️</span> Messages <span class="badge" id="m-bdg">0</span></button>
+          <div class="side-sep"></div>
+          <h4>Manage Site</h4>
+          <button class="anav" id="an-cms-hero" onclick="aTab('cms-hero')"><span class="ni">🏠</span> Home Page</button>
+          <button class="anav" id="an-cms-svc" onclick="aTab('cms-svc')"><span class="ni">✨</span> Services</button>
+          <button class="anav" id="an-cms-price" onclick="aTab('cms-price')"><span class="ni">💰</span> Pricing</button>
+          <button class="anav" id="an-cms-pod" onclick="aTab('cms-pod')"><span class="ni">🎙️</span> Podcast</button>
+          <button class="anav" id="an-cms-ct" onclick="aTab('cms-ct')"><span class="ni">📞</span> Contact Info</button>
+          <div class="side-sep"></div>
+          <h4>Settings</h4>
+          <button class="anav" id="an-email-cfg" onclick="aTab('email-cfg')"><span class="ni">📧</span> Email Setup</button>
+          <button class="anav" id="an-settings" onclick="aTab('settings')"><span class="ni">⚙️</span> Password</button>
+        </div>
+      </div>
+
+      <!-- MAIN CONTENT -->
+      <div class="adm-body">
+
+        <!-- OVERVIEW -->
+        <div class="apanel on" id="ap-overview">
+          <div class="aph">Overview</div>
+          <div class="aps">Welcome back, Yami! 🔥 Firebase connected — orders from anywhere in the world show here instantly.</div>
+          <div class="stats-row" id="stats-row"></div>
+          <div class="cms-box"><h4>Recent Bookings</h4><div id="recent-bk"></div></div>
+        </div>
+
+        <!-- BOOKINGS -->
+        <div class="apanel" id="ap-bookings">
+          <div class="aph">Cleaning Bookings</div>
+          <div class="aps">All customer booking requests. Confirm to send them a confirmation email.</div>
+          <div class="sh-row"><div></div><button class="btn-cl" onclick="clrDB('bookings')">Clear All</button></div>
+          <div id="bk-tbl"></div>
+        </div>
+
+        <!-- PODCAST -->
+        <div class="apanel" id="ap-podcast">
+          <div class="aph">Podcast Applications</div>
+          <div class="aps">Guest, co-host & sponsorship submissions.</div>
+          <div class="sh-row"><div></div><button class="btn-cl" onclick="clrDB('podcast')">Clear All</button></div>
+          <div id="pod-tbl"></div>
+        </div>
+
+        <!-- MESSAGES -->
+        <div class="apanel" id="ap-messages">
+          <div class="aph">Contact Messages</div>
+          <div class="aps">All contact form submissions.</div>
+          <div class="sh-row"><div></div><button class="btn-cl" onclick="clrDB('messages')">Clear All</button></div>
+          <div id="msg-tbl"></div>
+        </div>
+
+        <!-- CMS: HOME -->
+        <div class="apanel" id="ap-cms-hero">
+          <div class="aph">Edit Home Page</div>
+          <div class="aps">Changes go live on the website instantly — no code needed.</div>
+          <div class="cms-box">
+            <h4>Hero Section</h4>
+            <div class="cms-r full"><div class="cms-f"><label>Eyebrow Text</label><input type="text" id="c-eyebrow" placeholder="🌸 Gainesville, FL..."></div></div>
+            <div class="cms-r full"><div class="cms-f"><label>Main Headline</label><input type="text" id="c-h1" placeholder="Cleaning That Feels Personal Every Time"></div></div>
+            <div class="cms-r full"><div class="cms-f"><label>Subheadline</label><textarea id="c-sub" placeholder="Subtitle..."></textarea></div></div>
+            <button class="btn-sv" onclick="saveHero()">Save & Go Live</button><span class="sv-ok" id="sv-hero">✓ Live Now!</span>
+          </div>
+          <div class="cms-box">
+            <h4>CTA Banner</h4>
+            <div class="cms-r full"><div class="cms-f"><label>Headline</label><input type="text" id="c-cta-h"></div></div>
+            <div class="cms-r full"><div class="cms-f"><label>Subtext</label><input type="text" id="c-cta-p"></div></div>
+            <button class="btn-sv" onclick="saveCTA()">Save & Go Live</button><span class="sv-ok" id="sv-cta">✓ Live Now!</span>
+          </div>
+          <div class="cms-box">
+            <h4>Trust Badges</h4>
+            <div id="trust-ed"></div>
+            <button class="btn-sv" onclick="saveTrust()">Save Badges</button><span class="sv-ok" id="sv-trust">✓ Live Now!</span>
+          </div>
+        </div>
+
+        <!-- CMS: SERVICES -->
+        <div class="apanel" id="ap-cms-svc">
+          <div class="aph">Edit Services</div>
+          <div class="aps">Update names, descriptions, prices & icons — goes live instantly.</div>
+          <div class="cms-box">
+            <h4>Services</h4>
+            <div class="se-grid" id="se-grid"></div>
+            <button class="btn-add" onclick="addSvc()">+ Add Service</button>
+            <br><br>
+            <button class="btn-sv" onclick="saveSvcs()">Save & Go Live</button><span class="sv-ok" id="sv-svc">✓ Live Now!</span>
+          </div>
+        </div>
+
+        <!-- CMS: PRICING -->
+        <div class="apanel" id="ap-cms-price">
+          <div class="aph">Edit Pricing</div>
+          <div class="aps">Update all prices — goes live on the Pricing page instantly.</div>
+          <div class="cms-box">
+            <h4>Pricing Table</h4>
+            <div class="pe-hdr"><div class="pe-lbl" style="text-align:left;">Home Type</div><div class="pe-lbl">Basic Clean</div><div class="pe-lbl">Deep Clean</div><div></div></div>
+            <div class="pe-grid" id="pe-grid"></div>
+            <button class="btn-add" onclick="addPRow()">+ Add Home Type</button>
+            <br><br>
+            <button class="btn-sv" onclick="savePricing()">Save & Go Live</button><span class="sv-ok" id="sv-price">✓ Live Now!</span>
+          </div>
+        </div>
+
+        <!-- CMS: PODCAST -->
+        <div class="apanel" id="ap-cms-pod">
+          <div class="aph">Edit Podcast</div>
+          <div class="aps">Update AFIF podcast name and tagline.</div>
+          <div class="cms-box">
+            <h4>Podcast Details</h4>
+            <div class="cms-r"><div class="cms-f"><label>Podcast Name</label><input type="text" id="c-pod-nm" placeholder="AFIF"></div><div class="cms-f"><label>Tagline</label><input type="text" id="c-pod-tg" placeholder="A podcast by..."></div></div>
+            <button class="btn-sv" onclick="savePod()">Save & Go Live</button><span class="sv-ok" id="sv-pod">✓ Live Now!</span>
+          </div>
+        </div>
+
+        <!-- CMS: CONTACT -->
+        <div class="apanel" id="ap-cms-ct">
+          <div class="aph">Edit Contact Info</div>
+          <div class="aps">Updates show on the Contact page and booking confirmation instantly.</div>
+          <div class="cms-box">
+            <h4>Business Info</h4>
+            <div class="cms-r"><div class="cms-f"><label>Phone</label><input type="tel" id="c-ph"></div><div class="cms-f"><label>Email</label><input type="email" id="c-em2"></div></div>
+            <div class="cms-r"><div class="cms-f"><label>Website</label><input type="text" id="c-wb"></div><div class="cms-f"><label>Service Area</label><input type="text" id="c-ar"></div></div>
+            <div class="cms-r full"><div class="cms-f"><label>Availability</label><input type="text" id="c-av"></div></div>
+            <button class="btn-sv" onclick="saveCT()">Save & Go Live</button><span class="sv-ok" id="sv-ct">✓ Live Now!</span>
+          </div>
+        </div>
+
+        <!-- EMAIL CONFIG -->
+        <div class="apanel" id="ap-email-cfg">
+          <div class="aph">Email Setup</div>
+          <div class="aps">Set up real email sending so customers get confirmations automatically.</div>
+
+          <div class="email-cfg">
+            <h4>📧 How to Enable Real Emails (Free — takes 5 minutes)</h4>
+            <p>
+              This website uses <strong>EmailJS</strong> to send real emails — completely free, no server needed.<br><br>
+              <strong>Step 1:</strong> Go to <a href="https://emailjs.com" target="_blank">emailjs.com</a> → Create free account<br>
+              <strong>Step 2:</strong> Add Email Service → connect your Gmail (cleanbyyami@gmail.com)<br>
+              <strong>Step 3:</strong> Create two Email Templates (instructions below)<br>
+              <strong>Step 4:</strong> Paste your keys below and click Save
+            </p>
+            <div id="email-status-box"></div>
+          </div>
+
+          <div class="cms-box">
+            <h4>EmailJS Keys</h4>
+            <div class="cms-r full"><div class="cms-f"><label>Public Key (from Account → API Keys)</label><input type="text" id="ej-pub" placeholder="e.g. abc123XYZ..."></div></div>
+            <div class="cms-r"><div class="cms-f"><label>Service ID</label><input type="text" id="ej-svc" placeholder="e.g. service_abc123"></div><div class="cms-f"><label>Booking Received Template ID</label><input type="text" id="ej-t1" placeholder="e.g. template_booking"></div></div>
+            <div class="cms-r full"><div class="cms-f"><label>Booking Confirmed Template ID (sent when YOU click Confirm)</label><input type="text" id="ej-t2" placeholder="e.g. template_confirm"></div></div>
+            <button class="btn-sv" onclick="saveEmailCfg()">Save Email Config</button><span class="sv-ok" id="sv-email">✓ Saved!</span>
+          </div>
+
+          <div class="cms-box">
+            <h4>Template Setup Guide</h4>
+            <p style="font-size:13px;color:var(--t2);line-height:1.8;">
+              In EmailJS, create <strong>Template 1: "Booking Received"</strong> — sent to customer when they book.<br>
+              Use these variables in your template:<br>
+              <code style="background:#f5f5f5;padding:2px 6px;border-radius:4px;">{{customer_name}}</code> — customer's name<br>
+              <code style="background:#f5f5f5;padding:2px 6px;border-radius:4px;">{{customer_email}}</code> — their email<br>
+              <code style="background:#f5f5f5;padding:2px 6px;border-radius:4px;">{{service_type}}</code> — type of cleaning<br>
+              <code style="background:#f5f5f5;padding:2px 6px;border-radius:4px;">{{home_type}}</code> — home type<br>
+              <code style="background:#f5f5f5;padding:2px 6px;border-radius:4px;">{{booking_date}}</code> — preferred date<br>
+              <code style="background:#f5f5f5;padding:2px 6px;border-radius:4px;">{{price_estimate}}</code> — price range<br>
+              <code style="background:#f5f5f5;padding:2px 6px;border-radius:4px;">{{business_phone}}</code> — your phone<br><br>
+              Create <strong>Template 2: "Booking Confirmed"</strong> — sent when you click Confirm in admin.<br>
+              Same variables + <code style="background:#f5f5f5;padding:2px 6px;border-radius:4px;">{{confirmed_message}}</code> for any note you add.
+            </p>
+          </div>
+        </div>
+
+        <!-- SETTINGS / PASSWORD -->
+        <div class="apanel" id="ap-settings">
+          <div class="aph">Change Password</div>
+          <div class="aps">Update your admin login password.</div>
+          <div class="cms-box">
+            <h4>New Password</h4>
+            <div class="cms-r full"><div class="cms-f"><label>Current Password</label><input type="password" id="pw-cur" placeholder="Current"></div></div>
+            <div class="cms-r"><div class="cms-f"><label>New Password</label><input type="password" id="pw-new" placeholder="New"></div><div class="cms-f"><label>Confirm New</label><input type="password" id="pw-cnf" placeholder="Confirm"></div></div>
+            <button class="btn-sv" onclick="chgPw()">Update Password</button>
+            <span class="sv-ok" id="sv-pw">✓ Password Updated!</span>
+            <span id="pw-err" style="display:none;color:#C62828;font-size:13px;font-weight:500;margin-left:10px;"></span>
+          </div>
+          <div class="cms-box">
+            <h4>Export Data</h4>
+            <p style="font-size:13px;color:var(--t2);margin-bottom:14px;">Download all your bookings, podcast apps and messages as a JSON file.</p>
+            <button class="btn-sv" style="background:var(--t1);" onclick="exportData()">Export All Data</button>
+          </div>
+        </div>
+
+      </div><!-- /adm-body -->
+    </div><!-- /adm-layout -->
+  </div><!-- /adm-dash -->
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Clean<span>ByYami</span> ✨</div>
+  <p>Professional Cleaning · Gainesville, Florida</p>
+  <hr>
+  <p>
+    <a id="ft-ph" href="tel:+17275016135">(727) 501-6135</a> ·
+    <a id="ft-em" href="mailto:cleanbyyami@gmail.com">cleanbyyami@gmail.com</a> ·
+    <a id="ft-wb" href="https://cleanbyyami.com" target="_blank">cleanbyyami.com</a>
+  </p>
+  <p style="margin-top:8px;opacity:.4;font-size:12px;">© 2026 CleanByYami · All rights reserved · Gainesville, FL</p>
+</footer>
+
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<!-- Firebase SDK -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, push, set, get, update, remove, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDifBLr8u11sHe7Tbph5WQNVRG8w2hgP30",
+  authDomain: "cleanbyyami-4a987.firebaseapp.com",
+  databaseURL: "https://cleanbyyami-4a987-default-rtdb.firebaseio.com",
+  projectId: "cleanbyyami-4a987",
+  storageBucket: "cleanbyyami-4a987.firebasestorage.app",
+  messagingSenderId: "588925506703",
+  appId: "1:588925506703:web:7720f26e70e1176bb8ccfa"
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const database = getDatabase(firebaseApp);
+
+window.FDB = {
+  async push(collection, item){
+    try{
+      const r = ref(database, collection);
+      const newRef = push(r);
+      item._fbid = newRef.key;
+      await set(newRef, item);
+      return newRef.key;
+    }catch(e){ console.error('FB push:',e); return null; }
+  },
+  async arr(collection){
+    try{
+      const snap = await get(ref(database, collection));
+      if(!snap.exists()) return [];
+      return Object.values(snap.val()).sort((a,b)=>(b.ts||0)-(a.ts||0));
+    }catch(e){ console.error('FB arr:',e); return []; }
+  },
+  async del(collection, id){
+    try{
+      const snap = await get(ref(database, collection));
+      if(!snap.exists()) return;
+      const d = snap.val();
+      const k = Object.keys(d).find(k=>d[k].id===id||d[k]._fbid===id||k===id);
+      if(k) await remove(ref(database, collection+'/'+k));
+    }catch(e){ console.error('FB del:',e); }
+  },
+  async upd(collection, id, patch){
+    try{
+      const snap = await get(ref(database, collection));
+      if(!snap.exists()) return;
+      const d = snap.val();
+      const k = Object.keys(d).find(k=>d[k].id===id||d[k]._fbid===id||k===id);
+      if(k) await update(ref(database, collection+'/'+k), patch);
+    }catch(e){ console.error('FB upd:',e); }
+  },
+  async clr(collection){
+    try{ await remove(ref(database, collection)); }catch(e){}
+  },
+  listen(collection, cb){
+    onValue(ref(database, collection), snap=>{
+      if(!snap.exists()){ cb([]); return; }
+      cb(Object.values(snap.val()).sort((a,b)=>(b.ts||0)-(a.ts||0)));
+    });
+  }
+};
+
+window.DB={
+  get(k){try{return JSON.parse(localStorage.getItem('cby_'+k)||'null');}catch(e){return null;}},
+  set(k,v){try{localStorage.setItem('cby_'+k,JSON.stringify(v));}catch(e){}},
+  arr(k){const v=this.get(k);return Array.isArray(v)?v:[];},
+  push(k,item){const a=this.arr(k);a.unshift(item);this.set(k,a);},
+  del(k,id){this.set(k,this.arr(k).filter(i=>i.id!==id));},
+  upd(k,id,p){const a=this.arr(k);const i=a.findIndex(x=>x.id===id);if(i>-1){Object.assign(a[i],p);this.set(k,a);}},
+  clr(k){this.set(k,[]);}
+};
+
+window._fbData={bookings:[],podcast:[],messages:[]};
+
+FDB.listen('bookings', data=>{
+  window._fbData.bookings=data;
+  const dash=document.getElementById('adm-dash');
+  if(dash&&dash.classList.contains('active')){ renderBkTbl(); renderOverview(); updateBdg(); }
+});
+FDB.listen('podcast', data=>{
+  window._fbData.podcast=data;
+  const dash=document.getElementById('adm-dash');
+  if(dash&&dash.classList.contains('active')){ renderPodTbl(); renderOverview(); updateBdg(); }
+});
+FDB.listen('messages', data=>{
+  window._fbData.messages=data;
+  const dash=document.getElementById('adm-dash');
+  if(dash&&dash.classList.contains('active')){ renderMsgTbl(); renderOverview(); updateBdg(); }
+});
+
+window._fbReady=true;
+window.dispatchEvent(new Event('fbready'));
+</script>
+
+<script>
+if(!window._fbData) window._fbData={bookings:[],podcast:[],messages:[]};
+// LOCAL SETTINGS DB
+const DB=window.DB||{
+  get(k){try{return JSON.parse(localStorage.getItem('cby_'+k)||'null');}catch(e){return null;}},
+  set(k,v){try{localStorage.setItem('cby_'+k,JSON.stringify(v));}catch(e){}},
+  arr(k){const v=this.get(k);return Array.isArray(v)?v:[];},
+  push(k,item){const a=this.arr(k);a.unshift(item);this.set(k,a);},
+  del(k,id){this.set(k,this.arr(k).filter(i=>i.id!==id));},
+  upd(k,id,p){const a=this.arr(k);const i=a.findIndex(x=>x.id===id);if(i>-1){Object.assign(a[i],p);this.set(k,a);}},
+  clr(k){this.set(k,[]);}
+};
+
+// ══════════════════════════════════════════
+//  DEFAULTS
+// ══════════════════════════════════════════
+const DEF={
+  sc:{eyebrow:'🌸 Gainesville, FL & Surrounding Areas',h1:'Cleaning That Feels Personal Every Time',sub:'Professional residential & office cleaning by Yami — reliable, thorough, and tailored to your space.',ctaH:'Ready for a Spotless Space?',ctaP:"Book online in 2 minutes — your request goes straight to Yami's dashboard.",trust:['📍 Alachua County & Travel','⏰ Flexible Scheduling','✅ Up to 3 Bookings/Day','🏢 Homes & Small Offices']},
+  svcs:[
+    {icon:'🧹',name:'Basic Cleaning',desc:'Surfaces, floors, bathrooms & kitchen — keeping your space consistently fresh.',price:'From $50'},
+    {icon:'✨',name:'Deep Cleaning',desc:'Top-to-bottom thorough clean including inside appliances & detailed scrubbing.',price:'From $60'},
+    {icon:'🏢',name:'Office Cleaning',desc:'Small offices, desks, common areas & restrooms — kept spotless.',price:'Custom Quote'},
+    {icon:'⏱️',name:'Hourly Rate',desc:'Need something flexible? Book by the hour for a custom clean.',price:'From $40/hr'},
+  ],
+  pricing:[
+    {type:'Tiny house',basic:'$50–$60',deep:'$60–$300'},{type:'Condo',basic:'$50–$70',deep:'$60–$200'},
+    {type:'Apartment',basic:'$60–$120',deep:'$70–$360'},{type:'Mobile home',basic:'$100–$120',deep:'$120–$360'},
+    {type:'Cottage',basic:'$50–$110',deep:'$60–$350'},{type:'Duplex',basic:'$60–$70',deep:'$70–$200'},
+    {type:'Loft',basic:'$80–$170',deep:'$100–$600'},{type:'Bungalow',basic:'$110–$140',deep:'$150–$450'},
+    {type:'Townhouse',basic:'$60–$170',deep:'$70–$600'},{type:'Villa',basic:'$80–$100',deep:'$100–$300'},
+    {type:'Chalet',basic:'$80–$170',deep:'$100–$600'},
+  ],
+  pod:{name:'AFIF',tagline:'A podcast by Yami — raw, real, unfiltered conversations'},
+  ct:{phone:'(727) 501-6135',email:'cleanbyyami@gmail.com',web:'cleanbyyami.com',area:'Gainesville, FL (Alachua County) · Travel Available',avail:'Flexible Hours · Up to 3 Bookings/Day'},
+  pw:'yami2024'
+};
+
+const gSC=()=>DB.get('sc')||DEF.sc;
+const gSvcs=()=>DB.get('svcs')||DEF.svcs;
+const gPr=()=>DB.get('pricing')||DEF.pricing;
+const gPod=()=>DB.get('pod')||DEF.pod;
+const gCT=()=>DB.get('ct')||DEF.ct;
+const gPW=()=>DB.get('pw')||DEF.pw;
+const gEJ=()=>DB.get('ej')||{pub:'',svc:'',t1:'',t2:''};
+
+// ══════════════════════════════════════════
+//  EMAILJS
+// ══════════════════════════════════════════
+function initEmailJS(){
+  const ej=gEJ();
+  if(ej.pub){
+    try{emailjs.init({publicKey:ej.pub});}catch(e){}
+  }
+}
+async function sendEmail(templateId, params){
+  const ej=gEJ();
+  if(!ej.pub||!ej.svc||!templateId){return false;}
+  try{
+    await emailjs.send(ej.svc, templateId, params);
+    return true;
+  }catch(e){
+    console.error('EmailJS error:',e);
+    return false;
+  }
+}
+async function sendBookingReceived(booking){
+  const ct=gCT();
+  return sendEmail(gEJ().t1,{
+    customer_name: booking.fn+' '+(booking.ln||''),
+    customer_email: booking.em,
+    service_type: booking.sv,
+    home_type: booking.ty,
+    booking_date: booking.dt||'Not specified',
+    booking_time: booking.tm,
+    address: booking.ad,
+    price_estimate: booking.est||'To be confirmed',
+    special_notes: booking.nt||'None',
+    business_phone: ct.phone,
+    business_email: ct.email,
+    to_email: booking.em
+  });
+}
+async function sendBookingConfirmed(booking, note){
+  const ct=gCT();
+  return sendEmail(gEJ().t2,{
+    customer_name: booking.fn+' '+(booking.ln||''),
+    customer_email: booking.em,
+    service_type: booking.sv,
+    home_type: booking.ty,
+    booking_date: booking.dt||'Will be confirmed',
+    booking_time: booking.tm,
+    address: booking.ad,
+    price_estimate: booking.est||'To be confirmed',
+    confirmed_message: note||'Your booking is confirmed!',
+    business_phone: ct.phone,
+    business_email: ct.email,
+    to_email: booking.em
+  });
+}
+
+// ══════════════════════════════════════════
+//  RENDER SITE FROM CMS
+// ══════════════════════════════════════════
+function renderSite(){
+  const sc=gSC(), ct=gCT(), pod=gPod();
+  // Hero
+  g('h-eyebrow').textContent=sc.eyebrow;
+  g('h-title').innerHTML=sc.h1;
+  g('h-sub').textContent=sc.sub;
+  g('cta-h').textContent=sc.ctaH;
+  g('cta-p').textContent=sc.ctaP;
+  // Trust
+  g('trust-bar').innerHTML=(sc.trust||[]).map(t=>`<div class="trust-item">${t}</div>`).join('');
+  // Services
+  g('svcs-grid').innerHTML=gSvcs().map(s=>`
+    <div class="svc-card" onclick="go('book')">
+      <div class="svc-ico">${s.icon}</div>
+      <h3>${esc(s.name)}</h3>
+      <p>${esc(s.desc)}</p>
+      <div class="svc-price">${esc(s.price)}</div>
+    </div>`).join('');
+  // Home type dropdown
+  const bty=g('b-ty'); if(bty){
+    const cv=bty.value;
+    bty.innerHTML='<option value="">— Select type —</option>'+
+      gPr().map(p=>`<option${cv===p.type?' selected':''}>${esc(p.type)}</option>`).join('')+
+      '<option value="Small office">Small office</option>';
+  }
+  // Contact info
+  ['ci-ph','ci-em','ci-wb','ci-ar','ci-av'].forEach((id,i)=>{
+    const vals=[ct.phone,ct.email,ct.web,ct.area,ct.avail];
+    const e=g(id); if(e) e.textContent=vals[i];
+  });
+  g('bk-cl').textContent='📞 '+ct.phone+' · '+ct.email;
+  const ftph=g('ft-ph'); if(ftph){ftph.textContent=ct.phone;ftph.href='tel:'+ct.phone.replace(/[^0-9+]/g,'');}
+  const ftem=g('ft-em'); if(ftem){ftem.textContent=ct.email;ftem.href='mailto:'+ct.email;}
+  const ftwb=g('ft-wb'); if(ftwb){ftwb.textContent=ct.web;ftwb.href='https://'+ct.web.replace(/^https?:\/\//,'');}
+  // Podcast
+  g('pod-nm').textContent=pod.name;
+  g('pod-tg').textContent=pod.tagline;
+  // Pricing page
+  renderPricing();
+}
+function renderPricing(){
+  const data=gPr();
+  const tb=g('ptbody'); if(!tb) return;
+  tb.innerHTML=data.map(r=>`<tr><td><span class="pill">${esc(r.type)}</span></td><td class="pb">${esc(r.basic)}</td><td class="pd">${esc(r.deep)}</td></tr>`).join('');
+}
+function calcH(){
+  const r=parseFloat(g('hr-rate').value)||0, h=parseFloat(g('hr-hrs').value)||0;
+  g('hr-res').textContent='$'+Math.round(r*h);
+}
+
+// ══════════════════════════════════════════
+//  NAV
+// ══════════════════════════════════════════
+function go(p){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  const pg=document.getElementById('page-'+p);
+  if(pg) pg.classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  const m={home:0,pricing:1,book:2,podcast:3,contact:4,admin:5};
+  const ls=document.querySelectorAll('.nav-links a');
+  if(m[p]!==undefined&&ls[m[p]])ls[m[p]].classList.add('active');
+  window.scrollTo(0,0);
+  if(p==='admin') renderAdm();
+}
+function toggleMob(){g('mob-menu').classList.toggle('open');}
+function closeMob(){g('mob-menu').classList.remove('open');}
+window.addEventListener('scroll',()=>g('navbar').classList.toggle('scrolled',scrollY>10));
+function showPodTab(t){
+  ['guest','host','sponsor'].forEach(x=>{
+    g('pf-'+x).style.display=x===t?'block':'none';
+    g('pt-'+x).classList.toggle('on',x===t);
+  });
+}
+
+// ══════════════════════════════════════════
+//  BOOKING
+// ══════════════════════════════════════════
+function updateEst(){
+  const ty=v('b-ty'),sv=v('b-sv');
+  g('hr-fields').style.display=sv==='hourly'?'grid':'none';
+  const pp=g('p-prev'),pa=g('p-amt');
+  if(!ty||!sv){pp.style.display='none';return;}
+  if(sv==='hourly'){pa.textContent='$'+Math.round((parseFloat(g('b-hr').value)||40)*(parseFloat(g('b-hrs').value)||2));pp.style.display='block';return;}
+  if(sv==='office'){pa.textContent='Custom quote';pp.style.display='block';return;}
+  const pr=gPr().find(p=>p.type===ty);
+  if(pr){pa.textContent=sv==='basic'?pr.basic:pr.deep;pp.style.display='block';}
+  else pp.style.display='none';
+}
+async function submitBooking(){
+  const fn=v('b-fn'),ln=v('b-ln'),ph=v('b-ph'),em=v('b-em');
+  const ad=v('b-ad'),ty=v('b-ty'),sv=v('b-sv'),dt=v('b-dt'),tm=v('b-tm'),nt=v('b-nt');
+  if(!fn){alert('Please enter your first name.');return;}
+  if(!em){alert('Please enter your email address — needed to send your confirmation.');return;}
+  if(!ph){alert('Please enter your phone number.');return;}
+  if(!ty||!sv){alert('Please select home type and service.');return;}
+  if(!ad){alert('Please enter the address to be cleaned.');return;}
+  let est='';
+  if(sv==='hourly') est='$'+Math.round((parseFloat(g('b-hr').value)||40)*(parseFloat(g('b-hrs').value)||2));
+  else if(sv==='office') est='Custom quote';
+  else{const pr=gPr().find(p=>p.type===ty);if(pr)est=sv==='basic'?pr.basic:pr.deep;}
+  const booking={id:uid(),ts:Date.now(),fn,ln,ph,em,ad,ty,sv,dt,tm,nt,est,status:'pending'};
+  // Save to Firebase (real-time, works from ANY device worldwide)
+  if(window.FDB){ await FDB.push('bookings', booking); }
+  else { DB.push('bookings',booking); }
+  // Show success immediately
+  g('bk-form').style.display='none';
+  g('bk-suc').style.display='block';
+  g('cnf-name').textContent=fn;
+  g('cnf-email').textContent=em;
+  // Try to send email in background
+  const btn=g('bk-btn');
+  btn.disabled=true; btn.textContent='Sending...';
+  const emailOk=await sendBookingReceived(booking);
+  btn.disabled=false; btn.textContent='Confirm Booking Request ✨';
+  if(!emailOk){
+    const p=g('bk-suc').querySelector('p');
+    if(p) p.innerHTML=p.innerHTML+'<br><small style="color:var(--t3);">(Email confirmation not sent — EmailJS not configured yet. Set up in Admin → Email Setup)</small>';
+  }
+}
+function resetBooking(){
+  g('bk-form').style.display='block';
+  g('bk-suc').style.display='none';
+  ['b-fn','b-ln','b-ph','b-em','b-ad','b-dt','b-nt'].forEach(id=>{const e=g(id);if(e)e.value='';});
+  const bty=g('b-ty');if(bty)bty.value='';
+  const bsv=g('b-sv');if(bsv)bsv.value='';
+  g('p-prev').style.display='none';g('hr-fields').style.display='none';
+  const btn=g('bk-btn');if(btn){btn.disabled=false;btn.textContent='Confirm Booking Request ✨';}
+}
+
+// ══════════════════════════════════════════
+//  PODCAST & CONTACT FORMS
+// ══════════════════════════════════════════
+async function subPod(type){
+  let r={id:uid(),ts:Date.now(),type,status:'new'};
+  if(type==='guest'){if(!v('pg-nm')){alert('Name required.');return;}Object.assign(r,{name:v('pg-nm'),pronouns:v('pg-pr'),email:v('pg-em'),social:v('pg-so'),topic:v('pg-tp'),format:v('pg-fm'),time:v('pg-ti'),extra:v('pg-ex')});}
+  else if(type==='host'){if(!v('ph-nm')){alert('Name required.');return;}Object.assign(r,{name:v('ph-nm'),email:v('ph-em'),why:v('ph-wy'),social:v('ph-so'),idea:v('ph-id'),avail:v('ph-av')});}
+  else{if(!v('ps-nm')){alert('Name required.');return;}Object.assign(r,{name:v('ps-nm'),brand:v('ps-br'),email:v('ps-em'),budget:v('ps-bu'),desc:v('ps-de')});}
+  // Save to Firebase
+  if(window.FDB){ await FDB.push('podcast', r); }
+  else { DB.push('podcast',r); }
+  g('pf-'+type).innerHTML=`<div class="form-card" style="text-align:center;padding:48px 28px;"><div style="font-size:50px;margin-bottom:14px;">🎙️</div><div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--red);margin-bottom:9px;">Application Sent!</div><p style="font-size:14px;color:var(--t2);">Yami reviews every submission personally and will reach out soon.</p><p style="color:var(--pink);font-weight:600;margin-top:11px;font-size:13px;">${gCT().email}</p></div>`;
+}
+async function subContact(){
+  if(!v('c-nm')||!v('c-ms')){alert('Name and message required.');return;}
+  const msg={id:uid(),ts:Date.now(),name:v('c-nm'),email:v('c-em'),subject:v('c-su'),message:v('c-ms'),status:'new'};
+  if(window.FDB){ await FDB.push('messages', msg); }
+  else { DB.push('messages', msg); }
+  ['c-nm','c-em','c-su','c-ms'].forEach(id=>{const e=g(id);if(e)e.value='';});
+  g('c-btn').style.display='none';
+  g('c-suc').style.display='block';
+}
+
+// ══════════════════════════════════════════
+//  ADMIN AUTH
+// ══════════════════════════════════════════
+function admLogin(){
+  if(g('adm-pw').value===gPW()){
+    g('adm-login').style.display='none';
+    g('adm-dash').classList.add('active');
+    renderAdm();
+  }else{
+    g('l-err').style.display='block';
+    setTimeout(()=>g('l-err').style.display='none',3000);
+  }
+}
+function admOut(){
+  g('adm-login').style.display='block';
+  g('adm-dash').classList.remove('active');
+  g('adm-pw').value='';
+}
+
+// ══════════════════════════════════════════
+//  ADMIN TABS
+// ══════════════════════════════════════════
+function aTab(t){
+  document.querySelectorAll('.apanel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.anav').forEach(b=>b.classList.remove('on'));
+  g('ap-'+t).classList.add('on');
+  g('an-'+t).classList.add('on');
+  const fn={overview:renderOverview,bookings:renderBkTbl,podcast:renderPodTbl,messages:renderMsgTbl,'cms-hero':loadHeroEd,'cms-svc':loadSvcEd,'cms-price':loadPriceEd,'cms-pod':loadPodEd,'cms-ct':loadCTEd,'email-cfg':loadEmailEd};
+  if(fn[t]) fn[t]();
+}
+function renderAdm(){
+  // Always render ALL data panels so every tab is up to date
+  renderOverview();
+  renderBkTbl();
+  renderPodTbl();
+  renderMsgTbl();
+  updateBdg();
+  // Keep currently active tab visible (don't reset if user is on another tab)
+  const anyOn=document.querySelector('.apanel.on');
+  if(!anyOn){
+    const ov=g('ap-overview'); if(ov) ov.classList.add('on');
+    const an=g('an-overview'); if(an) an.classList.add('on');
+  }
+}
+function updateBdg(){
+  const bks=window._fbData&&window._fbData.bookings.length?window._fbData.bookings:DB.arr('bookings');
+  const pods=window._fbData&&window._fbData.podcast.length?window._fbData.podcast:DB.arr('podcast');
+  const msgs=window._fbData&&window._fbData.messages.length?window._fbData.messages:DB.arr('messages');
+  const bp=bks.filter(b=>b.status==='pending').length;
+  const pp=pods.filter(p=>p.status==='new').length;
+  const mp=msgs.filter(m=>m.status==='new').length;
+  setBdg('b-bdg',bp); setBdg('p-bdg',pp); setBdg('m-bdg',mp);
+}
+function setBdg(id,n){const e=g(id);if(e){e.textContent=n;e.style.display=n>0?'inline-block':'none';}}
+
+function renderOverview(){
+  const bk=window._fbData&&window._fbData.bookings.length?window._fbData.bookings:DB.arr('bookings');
+  const pod=window._fbData&&window._fbData.podcast.length?window._fbData.podcast:DB.arr('podcast');
+  const msg=window._fbData&&window._fbData.messages.length?window._fbData.messages:DB.arr('messages');
+  const pen=bk.filter(b=>b.status==='pending').length;
+  g('stats-row').innerHTML=`
+    <div class="stat-box"><div class="stat-n">${bk.length}</div><div class="stat-l">Total Bookings</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#E65100;">${pen}</div><div class="stat-l">Pending</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:var(--pink);">${pod.length}</div><div class="stat-l">Podcast Apps</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#1565C0;">${msg.length}</div><div class="stat-l">Messages</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#C62828;">${pen+pod.filter(p=>p.status==='new').length+msg.filter(m=>m.status==='new').length}</div><div class="stat-l">Need Attention</div></div>
+  `;
+  const rec=bk.slice(0,5);
+  g('recent-bk').innerHTML=!rec.length?'<div class="empty-s"><div class="ei">📋</div><p>No bookings yet — customers will appear here after they book.</p></div>':
+    `<div class="tbl-wrap"><table class="dtbl"><thead><tr><th>Date</th><th>Name</th><th>Phone</th><th>Email</th><th>Type</th><th>Service</th><th>Estimate</th><th>Status</th></tr></thead><tbody>
+    ${rec.map(b=>`<tr>
+      <td style="white-space:nowrap;">${fdate(b.ts)}</td>
+      <td style="font-weight:600;">${esc(b.fn)} ${esc(b.ln||'')}</td>
+      <td>${esc(b.ph||'—')}</td>
+      <td>${esc(b.em||'—')}</td>
+      <td><span class="pill" style="font-size:10px;">${esc(b.ty||'—')}</span></td>
+      <td>${esc(b.sv||'—')}</td>
+      <td style="font-weight:700;color:var(--red);">${esc(b.est||'—')}</td>
+      <td><span class="s${b.status[0]}">${b.status}</span></td>
+    </tr>`).join('')}
+    </tbody></table></div>`;
+}
+
+function renderBkTbl(){
+  const data=window._fbData&&window._fbData.bookings.length?window._fbData.bookings:DB.arr('bookings');
+  const el=g('bk-tbl');
+  if(!data.length){el.innerHTML='<div class="empty-s"><div class="ei">📋</div><p>No bookings yet. Customers will appear here after they submit the booking form.</p></div>';return;}
+  el.innerHTML=`<div class="tbl-wrap"><table class="dtbl"><thead><tr><th>Date</th><th>Name</th><th>Phone</th><th>Email</th><th>Address</th><th>Type</th><th>Service</th><th>Date Req</th><th>Estimate</th><th>Notes</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+  ${data.map(b=>`<tr>
+    <td style="white-space:nowrap;">${fdate(b.ts)}</td>
+    <td style="font-weight:600;white-space:nowrap;">${esc(b.fn)} ${esc(b.ln||'')}</td>
+    <td>${esc(b.ph||'—')}</td>
+    <td>${esc(b.em||'—')}</td>
+    <td style="max-width:120px;word-break:break-word;font-size:11px;">${esc(b.ad||'—')}</td>
+    <td><span class="pill" style="font-size:10px;">${esc(b.ty||'—')}</span></td>
+    <td style="white-space:nowrap;">${esc(b.sv||'—')}</td>
+    <td style="font-size:11px;white-space:nowrap;">${esc(b.dt||'—')}<br><span style="color:var(--t3);">${esc(b.tm||'')}</span></td>
+    <td style="font-weight:700;color:var(--red);white-space:nowrap;">${esc(b.est||'—')}</td>
+    <td style="max-width:140px;font-size:11px;word-break:break-word;">${esc(b.nt||'—')}</td>
+    <td><span class="${b.status==='confirmed'?'sc':'sp'}">${b.status}</span></td>
+    <td style="white-space:nowrap;">
+      ${b.status==='pending'?`<button class="tb tb-ok" onclick="confirmBk('${b.id}')">✓ Confirm & Email</button>`:''}
+      <button class="tb tb-del" onclick="delRec('bookings','${b.id}')">✕ Delete</button>
+    </td>
+  </tr>`).join('')}
+  </tbody></table></div>`;
+  updateBdg();
+}
+
+async function confirmBk(id){
+  const arr=DB.arr('bookings');
+  const booking=arr.find(b=>b.id===id);
+  if(!booking) return;
+  const note=prompt('Add a note for the customer (optional — press OK to skip):')||'';
+  if(window.FDB){ await FDB.upd('bookings',id,{status:'confirmed'}); } else { DB.upd('bookings',id,{status:'confirmed'}); }
+  renderBkTbl(); renderOverview(); updateBdg();
+  // Send confirmation email
+  if(booking.em){
+    const ok=await sendBookingConfirmed(booking,note);
+    if(ok) alert('✅ Booking confirmed! Confirmation email sent to '+booking.em);
+    else alert('✅ Booking confirmed! (Email not sent — configure EmailJS in Email Setup)');
+  }
+}
+
+function renderPodTbl(){
+  const data=window._fbData&&window._fbData.podcast.length?window._fbData.podcast:DB.arr('podcast');
+  const el=g('pod-tbl');
+  if(!data.length){el.innerHTML='<div class="empty-s"><div class="ei">🎙️</div><p>No podcast applications yet.</p></div>';return;}
+  el.innerHTML=`<div class="tbl-wrap"><table class="dtbl"><thead><tr><th>Date</th><th>Name</th><th>Type</th><th>Email</th><th>Social</th><th>Details</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+  ${data.map(p=>`<tr>
+    <td style="white-space:nowrap;">${fdate(p.ts)}</td>
+    <td style="font-weight:600;">${esc(p.name||'—')}</td>
+    <td><span class="pill" style="font-size:10px;">${esc(p.type)}</span></td>
+    <td>${esc(p.email||'—')}</td>
+    <td>${esc(p.social||'—')}</td>
+    <td style="max-width:180px;word-break:break-word;font-size:11px;">${esc(p.topic||p.why||p.desc||p.brand||'—')}</td>
+    <td><span class="${p.status==='reviewed'?'sc':'sn'}">${p.status}</span></td>
+    <td style="white-space:nowrap;">
+      ${p.status==='new'?`<button class="tb tb-ok" onclick="revPod('${p.id}')">Mark Reviewed</button>`:''}
+      <button class="tb tb-del" onclick="delRec('podcast','${p.id}')">✕</button>
+    </td>
+  </tr>`).join('')}
+  </tbody></table></div>`;
+  updateBdg();
+}
+
+function renderMsgTbl(){
+  const data=window._fbData&&window._fbData.messages.length?window._fbData.messages:DB.arr('messages');
+  const el=g('msg-tbl');
+  if(!data.length){el.innerHTML='<div class="empty-s"><div class="ei">✉️</div><p>No messages yet.</p></div>';return;}
+  el.innerHTML=`<div class="tbl-wrap"><table class="dtbl"><thead><tr><th>Date</th><th>Name</th><th>Email</th><th>Subject</th><th>Message</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+  ${data.map(m=>`<tr>
+    <td style="white-space:nowrap;">${fdate(m.ts)}</td>
+    <td style="font-weight:600;">${esc(m.name||'—')}</td>
+    <td>${esc(m.email||'—')}</td>
+    <td>${esc(m.subject||'—')}</td>
+    <td style="max-width:200px;word-break:break-word;">${esc(m.message||'—')}</td>
+    <td><span class="${m.status==='read'?'sr':'sn'}">${m.status}</span></td>
+    <td style="white-space:nowrap;">
+      ${m.status==='new'?`<button class="tb tb-ok" onclick="rdMsg('${m.id}')">Mark Read</button>`:''}
+      <button class="tb tb-del" onclick="delRec('messages','${m.id}')">✕</button>
+    </td>
+  </tr>`).join('')}
+  </tbody></table></div>`;
+  updateBdg();
+}
+
+async function revPod(id){if(window.FDB){await FDB.upd('podcast',id,{status:'reviewed'});}else{DB.upd('podcast',id,{status:'reviewed'});renderPodTbl();renderOverview();}}
+async function rdMsg(id){if(window.FDB){await FDB.upd('messages',id,{status:'read'});}else{DB.upd('messages',id,{status:'read'});renderMsgTbl();renderOverview();}}
+async function delRec(k,id){if(!confirm('Delete this record?'))return;if(window.FDB){await FDB.del(k,id);}else{DB.del(k,id);renderAdm();}}
+async function clrDB(k){if(!confirm('Clear ALL '+k+'?'))return;if(window.FDB){await FDB.clr(k);}else{DB.clr(k);renderAdm();}}
+
+// ══════════════════════════════════════════
+//  CMS EDITORS
+// ══════════════════════════════════════════
+function loadHeroEd(){
+  const sc=gSC();
+  g('c-eyebrow').value=sc.eyebrow||'';
+  g('c-h1').value=sc.h1||'';
+  g('c-sub').value=sc.sub||'';
+  g('c-cta-h').value=sc.ctaH||'';
+  g('c-cta-p').value=sc.ctaP||'';
+  const te=g('trust-ed');
+  te.innerHTML=(sc.trust||[]).map((t,i)=>`
+    <div style="display:flex;gap:8px;margin-bottom:7px;align-items:center;">
+      <input id="tr-${i}" value="${esc(t)}" style="flex:1;padding:7px 10px;border:2px solid var(--bdr);border-radius:7px;font-size:13px;font-family:inherit;outline:none;" placeholder="e.g. 📍 Gainesville, FL">
+      <button class="btn-dr" onclick="this.parentElement.remove()">✕</button>
+    </div>`).join('')+
+    `<button class="btn-add" onclick="addTr()" style="margin-top:4px;">+ Add Badge</button>`;
+}
+function addTr(){
+  const te=g('trust-ed');
+  const ab=te.querySelector('.btn-add');
+  const d=document.createElement('div');
+  d.style.cssText='display:flex;gap:8px;margin-bottom:7px;align-items:center;';
+  const i=te.querySelectorAll('input').length;
+  d.innerHTML=`<input id="tr-${i}" style="flex:1;padding:7px 10px;border:2px solid var(--bdr);border-radius:7px;font-size:13px;font-family:inherit;outline:none;" placeholder="e.g. ✅ Fully Insured"><button class="btn-dr" onclick="this.parentElement.remove()">✕</button>`;
+  te.insertBefore(d,ab);
+}
+function saveHero(){
+  const sc=gSC();
+  sc.eyebrow=g('c-eyebrow').value;
+  sc.h1=g('c-h1').value;
+  sc.sub=g('c-sub').value;
+  sc.trust=Array.from(g('trust-ed').querySelectorAll('input')).map(i=>i.value).filter(Boolean);
+  DB.set('sc',sc); renderSite(); sv('sv-hero');
+}
+function saveCTA(){
+  const sc=gSC(); sc.ctaH=g('c-cta-h').value; sc.ctaP=g('c-cta-p').value;
+  DB.set('sc',sc); renderSite(); sv('sv-cta');
+}
+function saveTrust(){
+  const sc=gSC();
+  sc.trust=Array.from(g('trust-ed').querySelectorAll('input')).map(i=>i.value).filter(Boolean);
+  DB.set('sc',sc); renderSite(); sv('sv-trust');
+}
+function loadSvcEd(){
+  const svcs=gSvcs();
+  g('se-grid').innerHTML=svcs.map((s,i)=>`
+    <div class="se-card">
+      <div class="se-top"><div class="se-num">Service ${i+1}</div><button class="btn-dr" onclick="this.closest('.se-card').remove()">Remove</button></div>
+      <div class="se-row">
+        <input placeholder="Icon e.g. 🧹" value="${esc(s.icon)}" class="se-ic">
+        <input placeholder="Service name" value="${esc(s.name)}" class="se-nm">
+        <input placeholder="Price e.g. From $50" value="${esc(s.price)}" class="se-pr">
+      </div>
+      <input class="se-desc" placeholder="Description" value="${esc(s.desc)}" style="width:100%;padding:7px 10px;border:1.5px solid var(--bdr);border-radius:7px;font-size:12px;font-family:inherit;background:#fff;outline:none;">
+    </div>`).join('');
+}
+function addSvc(){
+  const grid=g('se-grid');
+  const i=grid.querySelectorAll('.se-card').length;
+  const d=document.createElement('div'); d.className='se-card';
+  d.innerHTML=`<div class="se-top"><div class="se-num">Service ${i+1}</div><button class="btn-dr" onclick="this.closest('.se-card').remove()">Remove</button></div>
+    <div class="se-row"><input placeholder="Icon" class="se-ic"><input placeholder="Name" class="se-nm"><input placeholder="Price" class="se-pr"></div>
+    <input class="se-desc" placeholder="Description" style="width:100%;padding:7px 10px;border:1.5px solid var(--bdr);border-radius:7px;font-size:12px;font-family:inherit;background:#fff;outline:none;">`;
+  grid.appendChild(d);
+}
+function saveSvcs(){
+  const cards=g('se-grid').querySelectorAll('.se-card');
+  DB.set('svcs',Array.from(cards).map(c=>({icon:c.querySelector('.se-ic').value||'✨',name:c.querySelector('.se-nm').value||'Service',price:c.querySelector('.se-pr').value||'',desc:c.querySelector('.se-desc').value||''})));
+  renderSite(); sv('sv-svc');
+}
+function loadPriceEd(){
+  const pr=gPr();
+  g('pe-grid').innerHTML=pr.map((r,i)=>`
+    <div class="pe-row">
+      <input value="${esc(r.type)}" placeholder="Home type" class="pe-ty">
+      <input value="${esc(r.basic)}" placeholder="e.g. $50–$70" class="pe-ba">
+      <input value="${esc(r.deep)}" placeholder="e.g. $60–$200" class="pe-dp">
+      <button class="btn-dr" onclick="this.closest('.pe-row').remove()">✕</button>
+    </div>`).join('');
+}
+function addPRow(){
+  const grid=g('pe-grid');
+  const d=document.createElement('div'); d.className='pe-row';
+  d.innerHTML=`<input placeholder="Home type" class="pe-ty"><input placeholder="e.g. $50–$70" class="pe-ba"><input placeholder="e.g. $60–$200" class="pe-dp"><button class="btn-dr" onclick="this.closest('.pe-row').remove()">✕</button>`;
+  grid.appendChild(d);
+}
+function savePricing(){
+  const rows=g('pe-grid').querySelectorAll('.pe-row');
+  DB.set('pricing',Array.from(rows).map(r=>({type:r.querySelector('.pe-ty').value.trim(),basic:r.querySelector('.pe-ba').value.trim(),deep:r.querySelector('.pe-dp').value.trim()})).filter(r=>r.type));
+  renderSite(); sv('sv-price');
+}
+function loadPodEd(){const p=gPod();g('c-pod-nm').value=p.name||'';g('c-pod-tg').value=p.tagline||'';}
+function savePod(){DB.set('pod',{name:g('c-pod-nm').value,tagline:g('c-pod-tg').value});renderSite();sv('sv-pod');}
+function loadCTEd(){const c=gCT();g('c-ph').value=c.phone||'';g('c-em2').value=c.email||'';g('c-wb').value=c.web||'';g('c-ar').value=c.area||'';g('c-av').value=c.avail||'';}
+function saveCT(){DB.set('ct',{phone:g('c-ph').value,email:g('c-em2').value,web:g('c-wb').value,area:g('c-ar').value,avail:g('c-av').value});renderSite();sv('sv-ct');}
+function loadEmailEd(){
+  const ej=gEJ();
+  g('ej-pub').value=ej.pub||'';
+  g('ej-svc').value=ej.svc||'';
+  g('ej-t1').value=ej.t1||'';
+  g('ej-t2').value=ej.t2||'';
+  const isConfigured=ej.pub&&ej.svc&&ej.t1&&ej.t2;
+  g('email-status-box').innerHTML=`<div class="email-status ${isConfigured?'ok':'no'}">${isConfigured?'✅ Email is configured and ready':'⚠️ Email not configured yet — customers won\'t receive emails'}</div>`;
+}
+function saveEmailCfg(){
+  DB.set('ej',{pub:g('ej-pub').value.trim(),svc:g('ej-svc').value.trim(),t1:g('ej-t1').value.trim(),t2:g('ej-t2').value.trim()});
+  initEmailJS(); sv('sv-email');
+  loadEmailEd();
+}
+function chgPw(){
+  const cur=g('pw-cur').value,nw=g('pw-new').value,cnf=g('pw-cnf').value;
+  const perr=g('pw-err'); perr.style.display='none';
+  if(cur!==gPW()){perr.textContent='Current password is wrong.';perr.style.display='inline';return;}
+  if(!nw){perr.textContent='New password cannot be empty.';perr.style.display='inline';return;}
+  if(nw!==cnf){perr.textContent='Passwords do not match.';perr.style.display='inline';return;}
+  DB.set('pw',nw);
+  g('pw-cur').value='';g('pw-new').value='';g('pw-cnf').value='';
+  sv('sv-pw');
+}
+function exportData(){
+  const blob=new Blob([JSON.stringify({bookings:DB.arr('bookings'),podcast:DB.arr('podcast'),messages:DB.arr('messages'),exported:new Date().toISOString()},null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='cleanbyyami-data-'+Date.now()+'.json';a.click();URL.revokeObjectURL(url);
+}
+
+// ══════════════════════════════════════════
+//  UTILS
+// ══════════════════════════════════════════
+const g=id=>document.getElementById(id);
+const v=id=>{const e=g(id);return e?e.value.trim():'';};
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).substr(2,5);
+const fdate=ts=>new Date(ts).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+const esc=s=>String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+function sv(id){const e=g(id);if(!e)return;e.style.display='inline';setTimeout(()=>e.style.display='none',3000);}
+
+// ══════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════
+renderSite();
+initEmailJS();
+
+// Firebase real-time listeners handle all updates automatically — no polling needed
+</script>
+</body>
+</html>
